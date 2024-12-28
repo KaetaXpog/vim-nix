@@ -66,7 +66,7 @@ syn region nixInheritAttributeSubExpr start="("ms=e+1 end="\ze)" contained conta
 syn region nixInheritAttributeScope start="\ze(" end=")" contained contains=nixInheritAttributeSubExpr
 syn region nixAttributeDefinition matchgroup=nixInherit start="\<inherit\>" end=";" contained contains=nixComment,nixInheritAttributeScope,nixAttribute
 
-syn region nixAttributeSet start="{" end="}" contains=nixComment,nixAttributeDefinition
+syn region nixAttributeSet start="{" end="}" fold contains=nixComment,nixAttributeDefinition
 
 "                                                                                                              vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 syn region nixArgumentDefinitionWithDefault matchgroup=nixArgumentDefinition start="[a-zA-Z_][a-zA-Z0-9_'-]*\ze\%(\s\|#.\{-\}\n\|\n\|/\*\_.\{-\}\*/\)*?\@=" matchgroup=NONE end="[,}]\@=" transparent contained contains=@nixExpr
@@ -289,5 +289,6 @@ hi def link nixWithExprKeyword           Keyword
 " large files such as all-packages.nix are one large attribute set, so if we'd
 " use sync patterns we'd have to go back to the start of the file anyway
 syn sync fromstart
+setlocal foldmethod=syntax
 
 let b:current_syntax = "nix"
